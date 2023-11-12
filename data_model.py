@@ -1,22 +1,31 @@
 import pandas as pd
 from tqdm import tqdm
 class DataModelV5:
+    """
+    A class representing the data model, including data loading and schema change handling.
+    """
     def __init__(self):
+        """
+        Initializes the DataModel with empty main and history dataframes.
+        """
         self.main_data = pd.DataFrame()
         self.history_data = pd.DataFrame(columns=['column_name', 'old_value', 'new_value', 'timestamp'])
         self.previous_schema = None
 
     def load_data(self, df):
-        # Если главные данные пусты или новые данные имеют другие столбцы, просто заменяем данные.
+        """
+        Loads data into the model, handling schema changes and data differences.
+
+        Args:
+            df (pd.DataFrame): The DataFrame to load.
+        """
         if self.main_data.empty or not df.columns.equals(self.main_data.columns):
             self.main_data = df.copy()
             return
 
 
 
-        # Векторизованное сравнение данных
         differences = (self.main_data != df) & ~df.isna() & ~self.main_data.isna()
-        # Проверка схемы
         current_schema = df.dtypes.to_dict()
         if self.previous_schema and self.previous_schema != current_schema:
             print("Warning: Data schema has changed!")
@@ -31,7 +40,6 @@ class DataModelV5:
         else:
             print("Data schema check passed successfully!")
 
-        # Создаем прогресс-бар
         total_changes = differences.sum().sum()
         progress_bar = tqdm(total=total_changes, desc="Processing changes")
 
@@ -45,13 +53,10 @@ class DataModelV5:
                     'timestamp': pd.Timestamp.now()
                 }
                 self.history_data = pd.concat([self.history_data, pd.DataFrame([new_row])], ignore_index=True)
-                progress_bar.update(1)  # обновляем прогресс-бар
+                progress_bar.update(1)  
 
-        # Закрываем прогресс-бар
         progress_bar.close()
-        # Обновляем основную таблицу
         self.main_data = df.copy()
-        # Обновление схемы
         self.previous_schema = current_schema
 
     def get_data(self):
