@@ -29,15 +29,9 @@ MDM (Master Data Management) Project is a Python-based data management and analy
 
 To use the text-based user interface, run the `main_v2` function. You will be presented with a menu where you can select various actions to perform on your data.
 
-```bash
-python your_script.py
-```
 ### Graphical User Interface
-To use the graphical user interface, run the 'main_gui' function. This will open a graphical interface that provides the same functionality as the text-based interface but with a visual interface.
+To use the graphical user interface, run the `main_gui` function. This will open a graphical interface that provides the same functionality as the text-based interface but with a visual interface.
 
-```bash
-python your_script.py
-```
 ## Requirements
 Make sure you have the following libraries installed:
 
