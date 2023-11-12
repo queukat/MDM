@@ -3,11 +3,29 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 def validate_data(df):
+    """
+    Validates the DataFrame for null values.
+
+    Args:
+        df (vaex.DataFrame): The DataFrame to be validated.
+
+    Raises:
+        ValueError: If null values are found in the DataFrame.
+    """
     if df.isnull().sum().sum() > 0:
         raise ValueError("Data contains null values. Please clean the data before analysis.")
     return df
 
 def describe_data(df):
+    """
+    Describes the DataFrame by calculating statistical metrics for each column.
+
+    Args:
+        df (vaex.DataFrame): The DataFrame to be described.
+
+    Returns:
+        dict: A dictionary containing statistical metrics for each column.
+    """
     validate_data(df)
     stats = {}
     for col in df.column_names:
@@ -24,10 +42,24 @@ def describe_data(df):
     return stats
 
 def plot_distribution(df, column_name):
+    """
+    Plots the distribution of a specified column in the DataFrame.
+
+    Args:
+        df (vaex.DataFrame): The DataFrame containing the data.
+        column_name (str): The name of the column to plot.
+    """
     validate_data(df)
     df.viz.histogram(column_name, show=True, figsize=(10, 5))
 
 def plot_boxplot(df, column_name):
+    """
+    Plots a boxplot for a specified column in the DataFrame.
+
+    Args:
+        df (vaex.DataFrame): The DataFrame containing the data.
+        column_name (str): The name of the column to plot.
+    """
     validate_data(df)
     sns.boxplot(x=df[column_name].values)  # Convert vaex series to numpy for visualization
     plt.title(f'Box plot for {column_name}')
