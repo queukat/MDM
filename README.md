@@ -3,7 +3,6 @@
 <!-- public-repo-status -->
 > Status: Experimental/legacy. This repository is public for source review and learning; issues and pull requests are disabled unless the project becomes actively supported.
 
-
 MDM (Master Data Management) Project is a Python-based data management and analysis tool. It provides a user-friendly interface for generating, loading, analyzing, and visualizing data. This project is designed to help users manage and analyze their data effectively.
 
 ## Features
@@ -54,9 +53,6 @@ Fork the repository.
 2. Make your changes and commit them.
 3. Push your changes to your fork.
 4. Submit a pull request to the main repository.
-
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
 This project was created as part of a master data management course and serves as a practical tool for data management and analysis.
